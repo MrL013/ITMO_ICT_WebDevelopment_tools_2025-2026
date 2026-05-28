@@ -1,0 +1,22 @@
+site_name: Lab1 Docs
+site_description: Лабораторная работа 1. Реализация серверного приложения FastAPI. Разработка веб-приложения для поиска партнеров в путешествие
+
+theme:
+  name: mkdocs
+  palette:
+    primary: blue
+    accent: light blue
+
+nav:
+  - Home: index.md
+  - API: api.md
+  - Запуск: run.md
+
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - admonition
+  - codehilite

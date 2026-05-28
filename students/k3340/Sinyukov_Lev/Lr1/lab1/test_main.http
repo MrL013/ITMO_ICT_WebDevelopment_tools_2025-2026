@@ -1,0 +1,181 @@
+@baseUrl = http://127.0.0.1:8000
+
+@ownerEmail = owner_demo_3@example.com
+@ownerUsername = owner_demo_3
+@ownerPassword = qwerty123
+
+@guestEmail = guest_demo_3@example.com
+@guestUsername = guest_demo_3
+@guestPassword = qwerty123
+
+### 0) Health
+GET {{baseUrl}}/
+Accept: application/json
+
+###
+
+### 1) Register owner (if 400 -> user already exists, continue)
+POST {{baseUrl}}/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "email": "{{ownerEmail}}",
+  "username": "{{ownerUsername}}",
+  "password": "{{ownerPassword}}"
+}
+
+###
+
+### 2) Login owner -> save owner token
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{ownerEmail}}",
+  "password": "{{ownerPassword}}"
+}
+
+> {% client.global.set("ownerToken", response.body.access_token); %}
+
+###
+
+### 3) Owner profile
+POST {{baseUrl}}/api/v1/profiles/me
+Authorization: Bearer {{ownerToken}}
+Content-Type: application/json
+
+{
+  "full_name": "Owner Demo",
+  "bio": "I plan trips and coordinate routes.",
+  "skills": "planning, communication, logistics",
+  "travel_preferences": "train, budget hotels, early start"
+}
+
+###
+
+### 4) Owner creates trip -> save tripId
+POST {{baseUrl}}/api/v1/trips/
+Authorization: Bearer {{ownerToken}}
+Content-Type: application/json
+
+{
+  "title": "Trip to Kazan",
+  "departure_city": "Moscow",
+  "destination_city": "Kazan",
+  "start_date": "2026-07-01",
+  "end_date": "2026-07-07",
+  "duration_days": 7,
+  "route_details": "Moscow -> Kazan by train"
+}
+
+> {% client.global.set("tripId", response.body.id); %}
+
+###
+
+### 5) Register guest (if 400 -> user already exists, continue)
+POST {{baseUrl}}/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "email": "{{guestEmail}}",
+  "username": "{{guestUsername}}",
+  "password": "{{guestPassword}}"
+}
+
+###
+
+### 6) Login guest -> save guest token
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{guestEmail}}",
+  "password": "{{guestPassword}}"
+}
+
+> {% client.global.set("guestToken", response.body.access_token); %}
+
+###
+
+### 7) Guest me -> save guestUserId
+GET {{baseUrl}}/api/v1/users/me
+Authorization: Bearer {{guestToken}}
+Accept: application/json
+
+> {% client.global.set("guestUserId", response.body.id); %}
+
+###
+
+### 8) Guest join trip
+POST {{baseUrl}}/api/v1/trips/{{tripId}}/join
+Authorization: Bearer {{guestToken}}
+Content-Type: application/json
+
+{
+  "note": "Can help with route planning and bookings."
+}
+
+###
+
+### 9) Owner approves guest
+PATCH {{baseUrl}}/api/v1/trips/{{tripId}}/participants/{{guestUserId}}
+Authorization: Bearer {{ownerToken}}
+Content-Type: application/json
+
+{
+  "status": "approved",
+  "note": "Welcome on board!"
+}
+
+###
+
+### 10) Guest creates message -> save messageId
+POST {{baseUrl}}/api/v1/trips/{{tripId}}/messages/
+Authorization: Bearer {{guestToken}}
+Content-Type: application/json
+
+{
+  "content": "Hi! I can take care of tickets."
+}
+
+> {% client.global.set("messageId", response.body.id); %}
+
+###
+
+### 11) Guest edits own message
+PUT {{baseUrl}}/api/v1/trips/{{tripId}}/messages/{{messageId}}
+Authorization: Bearer {{guestToken}}
+Content-Type: application/json
+
+{
+  "content": "Hi! I can take care of tickets and hotel booking."
+}
+
+###
+
+### 12) Read trip messages
+GET {{baseUrl}}/api/v1/trips/{{tripId}}/messages/
+Authorization: Bearer {{ownerToken}}
+Accept: application/json
+
+###
+
+### 13) Manual search
+POST {{baseUrl}}/api/v1/trips/search
+Content-Type: application/json
+Accept: application/json
+
+{
+  "departure_city": "Moscow",
+  "destination_city": "Kazan",
+  "start_date_from": "2026-06-01",
+  "start_date_to": "2026-08-01",
+  "max_duration_days": 10
+}
+
+###
+
+### 14) Trips with nested objects
+GET {{baseUrl}}/api/v1/trips/
+Accept: application/json
+
