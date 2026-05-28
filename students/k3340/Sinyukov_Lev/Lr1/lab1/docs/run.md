@@ -8,11 +8,7 @@ pip install -r requirements.txt
 
 ## 2. Настройка окружения
 
-Создайте `.env` на основе `.env.example`.
-
-Поддерживаются обе переменные:
-- `DATABASE_URL`
-- `DB_ADMIN` (из методички)
+Создайте `.env`
 
 Пример:
 
