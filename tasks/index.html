@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>API - Lab1 Docs</title>
+        <title>Задания - Lab2 Docs</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">Lab1 Docs</a>
+                <a class="navbar-brand" href="..">Lab2 Docs</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="./" class="nav-link active" aria-current="page">API</a>
+                                <a href="./" class="nav-link active" aria-current="page">Задания</a>
                             </li>
                             <li class="nav-item">
                                 <a href="../run/" class="nav-link">Запуск</a>
@@ -79,25 +79,13 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#api" class="nav-link">API</a>
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">Задания</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">Аутентификация и пользователи</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">Профили</a>
+            <li class="nav-item" data-bs-level="2"><a href="#1-threading-multiprocessing-asyncio" class="nav-link">Задача 1. Сравнение threading, multiprocessing и asyncio</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">Поездки</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#_4" class="nav-link">Участники поездки</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#_5" class="nav-link">Сообщения</a>
+            <li class="nav-item" data-bs-level="2"><a href="#2-" class="nav-link">Задача 2. Параллельный парсинг веб-страниц с сохранением в БД</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -108,41 +96,92 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h1>
-<h2 id="_1">Аутентификация и пользователи<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h1 id="_1">Задания<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="1-threading-multiprocessing-asyncio">Задача 1. Сравнение <code>threading</code>, <code>multiprocessing</code> и <code>asyncio</code><a class="headerlink" href="#1-threading-multiprocessing-asyncio" title="Permanent link">&para;</a></h2>
+<p>В <code>task1</code> реализованы три отдельные программы:</p>
 <ul>
-<li><code>POST /api/v1/auth/register</code> - регистрация</li>
-<li><code>POST /api/v1/auth/login</code> - вход</li>
-<li><code>POST /api/v1/auth/change-password</code> - смена пароля</li>
-<li><code>GET /api/v1/users/me</code> - текущий пользователь</li>
-<li><code>GET /api/v1/users</code> - список пользователей</li>
+<li><code>threading_sum.py</code></li>
+<li><code>multiprocessing_sum.py</code></li>
+<li><code>async_sum.py</code></li>
 </ul>
-<h2 id="_2">Профили<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>Каждая программа:</p>
 <ul>
-<li><code>POST /api/v1/profiles/me</code> - создать профиль</li>
-<li><code>PUT /api/v1/profiles/me</code> - обновить профиль</li>
-<li><code>GET /api/v1/profiles/me</code> - получить профиль</li>
+<li>содержит функцию <code>calculate_sum()</code></li>
+<li>делит диапазон на несколько частей</li>
+<li>считает частичные суммы параллельно</li>
+<li>объединяет результат</li>
+<li>измеряет время выполнения</li>
 </ul>
-<h2 id="_3">Поездки<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_2">Особенность реализации<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>Сумма от <code>1</code> до <code>10_000_000_000_000</code> считается не прямым циклом, а через формулу арифметической прогрессии:</p>
+<div class="codehilite"><pre><span></span><code>sum = (start + end) * count // 2
+</code></pre></div>
+
+<p>Это сделано для того, чтобы задача завершалась за разумное время и позволяла сравнивать накладные расходы разных моделей параллелизма.</p>
+<h3 id="_3">Ожидаемый результат<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Итоговая сумма:</p>
+<div class="codehilite"><pre><span></span><code>50000000000005000000000000
+</code></pre></div>
+
+<h3 id="_4">Наблюдение по результатам<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>POST /api/v1/trips/</code> - создать поездку</li>
-<li><code>GET /api/v1/trips/</code> - список поездок с вложенными объектами</li>
-<li><code>GET /api/v1/trips/{trip_id}</code> - получить поездку с вложенными объектами</li>
-<li><code>PUT /api/v1/trips/{trip_id}</code> - обновить поездку</li>
-<li><code>DELETE /api/v1/trips/{trip_id}</code> - удалить поездку</li>
-<li><code>POST /api/v1/trips/search</code> - ручной поиск поездок</li>
+<li><code>asyncio</code> и <code>threading</code> оказываются быстрее в такой постановке</li>
+<li><code>multiprocessing</code> работает медленнее из-за запуска отдельных процессов</li>
 </ul>
-<h2 id="_4">Участники поездки<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="2-">Задача 2. Параллельный парсинг веб-страниц с сохранением в БД<a class="headerlink" href="#2-" title="Permanent link">&para;</a></h2>
+<p>В <code>task2</code> реализованы:</p>
 <ul>
-<li><code>POST /api/v1/trips/{trip_id}/join</code> - заявка на участие</li>
-<li><code>PATCH /api/v1/trips/{trip_id}/participants/{user_id}</code> - изменение статуса участника</li>
+<li><code>threading_parser.py</code></li>
+<li><code>multiprocessing_parser.py</code></li>
+<li><code>async_parser.py</code></li>
+<li><code>compare.py</code></li>
+<li><code>inspect_database.py</code></li>
 </ul>
-<h2 id="_5">Сообщения<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_5">Что делает парсер<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>Каждая программа:</p>
 <ul>
-<li><code>GET /api/v1/trips/{trip_id}/messages/</code> - список сообщений</li>
-<li><code>POST /api/v1/trips/{trip_id}/messages/</code> - создать сообщение</li>
-<li><code>PUT /api/v1/trips/{trip_id}/messages/{message_id}</code> - обновить сообщение</li>
-<li><code>DELETE /api/v1/trips/{trip_id}/messages/{message_id}</code> - удалить сообщение</li>
+<li>получает список URL-адресов</li>
+<li>делит его на равные части</li>
+<li>загружает HTML-страницы</li>
+<li>извлекает содержимое тега <code>&lt;title&gt;</code></li>
+<li>сохраняет результат в базу данных</li>
+<li>печатает обработанные URL и заголовки</li>
+<li>измеряет общее время выполнения</li>
+</ul>
+<h3 id="_6">Как сохраняются данные<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>Используется та же база данных PostgreSQL, что и в лабораторной работе 1.</p>
+<p>Результаты записываются в существующие таблицы:</p>
+<ul>
+<li><code>users</code> — создаётся или переиспользуется служебный пользователь-парсер</li>
+<li><code>trips</code> — создаётся или переиспользуется служебная поездка</li>
+<li><code>messages</code> — каждый результат парсинга сохраняется как сообщение</li>
+</ul>
+<p>Формат сообщения:</p>
+<div class="codehilite"><pre><span></span><code>[asyncio] https://www.python.org -&gt; Welcome to Python.org
+</code></pre></div>
+
+<h3 id="_7">Переменные окружения<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>Файл <code>task2/.env</code> должен содержать:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">DATABASE_URL</span><span class="o">=</span><span class="n">postgresql</span><span class="o">+</span><span class="nl">psycopg2</span><span class="p">:</span><span class="o">//</span><span class="nl">postgres</span><span class="p">:</span><span class="mi">0000</span><span class="nv">@localhost</span><span class="err">:</span><span class="mi">5432</span><span class="o">/</span><span class="n">travel_buddy_db</span>
+<span class="n">PARSER_USER_EMAIL</span><span class="o">=</span><span class="n">parser</span><span class="nv">@travel</span><span class="o">-</span><span class="n">buddy</span><span class="p">.</span><span class="k">local</span>
+<span class="n">PARSER_USERNAME</span><span class="o">=</span><span class="n">web_parser</span>
+<span class="n">PARSER_TRIP_TITLE</span><span class="o">=</span><span class="n">Web</span><span class="w"> </span><span class="n">parsing</span><span class="w"> </span><span class="n">results</span>
+</code></pre></div>
+
+<h3 id="_8">Проверка базы данных<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>Скрипт <code>inspect_database.py</code> позволяет:</p>
+<ul>
+<li>проверить подключение к PostgreSQL</li>
+<li>вывести количество записей в таблицах</li>
+<li>увидеть пользователя-парсера</li>
+<li>увидеть служебную поездку</li>
+<li>просмотреть сообщения, созданные во время парсинга</li>
+</ul>
+<h3 id="_9">Наблюдение по результатам<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>asyncio</code> показал лучшее время на сетевом парсинге</li>
+<li><code>threading</code> также работает эффективно для I/O-bound задач</li>
+<li><code>multiprocessing</code> оказался самым медленным из-за накладных расходов на процессы</li>
 </ul></div>
             </div>
         </div>

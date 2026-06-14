@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Запуск - Lab1 Docs</title>
+        <title>Запуск - Lab2 Docs</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">Lab1 Docs</a>
+                <a class="navbar-brand" href="..">Lab2 Docs</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../api/" class="nav-link">API</a>
+                                <a href="../tasks/" class="nav-link">Задания</a>
                             </li>
                             <li class="nav-item">
                                 <a href="./" class="nav-link active" aria-current="page">Запуск</a>
@@ -52,7 +52,7 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../api/" class="nav-link">
+                                <a rel="prev" href="../tasks/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
@@ -89,15 +89,15 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#3" class="nav-link">3. Миграции</a>
+            <li class="nav-item" data-bs-level="2"><a href="#3-task1" class="nav-link">3. Запуск task1</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#4" class="nav-link">4. Запуск приложения</a>
+            <li class="nav-item" data-bs-level="2"><a href="#4-task2" class="nav-link">4. Запуск task2</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#5-swagger" class="nav-link">5. Swagger</a>
+            <li class="nav-item" data-bs-level="2"><a href="#5" class="nav-link">5. Что смотреть в результатах</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -110,29 +110,61 @@
 
 <h1 id="_1">Запуск проекта<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <h2 id="1">1. Установка зависимостей<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<p>Для <code>task1</code> достаточно стандартного Python.</p>
+<p>Для <code>task2</code> установите зависимости:</p>
+<div class="codehilite"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>task2/requirements.txt
 </code></pre></div>
 
 <h2 id="2">2. Настройка окружения<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>Создайте <code>.env</code></p>
+<p>Для <code>task2</code> заполните файл <code>task2/.env</code>.</p>
 <p>Пример:</p>
 <div class="codehilite"><pre><span></span><code><span class="n">DATABASE_URL</span><span class="o">=</span><span class="n">postgresql</span><span class="o">+</span><span class="nl">psycopg2</span><span class="p">:</span><span class="o">//</span><span class="nl">postgres</span><span class="p">:</span><span class="mi">0000</span><span class="nv">@localhost</span><span class="err">:</span><span class="mi">5432</span><span class="o">/</span><span class="n">travel_buddy_db</span>
-<span class="n">SECRET_KEY</span><span class="o">=</span><span class="nf">replace</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">long</span><span class="o">-</span><span class="n">random</span><span class="o">-</span><span class="n">string</span>
-<span class="n">ALGORITHM</span><span class="o">=</span><span class="n">HS256</span>
-<span class="n">ACCESS_TOKEN_EXPIRE_MINUTES</span><span class="o">=</span><span class="mi">60</span>
+<span class="n">PARSER_USER_EMAIL</span><span class="o">=</span><span class="n">parser</span><span class="nv">@travel</span><span class="o">-</span><span class="n">buddy</span><span class="p">.</span><span class="k">local</span>
+<span class="n">PARSER_USERNAME</span><span class="o">=</span><span class="n">web_parser</span>
+<span class="n">PARSER_TRIP_TITLE</span><span class="o">=</span><span class="n">Web</span><span class="w"> </span><span class="n">parsing</span><span class="w"> </span><span class="n">results</span>
 </code></pre></div>
 
-<h2 id="3">3. Миграции<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>alembic<span class="w"> </span>upgrade<span class="w"> </span>head
+<p>База данных должна совпадать с той, которая использовалась в лабораторной работе 1.</p>
+<h2 id="3-task1">3. Запуск <code>task1</code><a class="headerlink" href="#3-task1" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>task1
+python<span class="w"> </span>threading_sum.py
+python<span class="w"> </span>multiprocessing_sum.py
+python<span class="w"> </span>async_sum.py
+python<span class="w"> </span>compare.py
 </code></pre></div>
 
-<h2 id="4">4. Запуск приложения<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code>uvicorn<span class="w"> </span>app.main:app<span class="w"> </span>--reload
-</code></pre></div>
-
-<h2 id="5-swagger">5. Swagger<a class="headerlink" href="#5-swagger" title="Permanent link">&para;</a></h2>
+<p>Проверка:</p>
 <ul>
-<li><a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a></li>
+<li>все три программы должны вернуть одинаковую сумму</li>
+<li><code>compare.py</code> должен вывести итоговое сравнение времени</li>
+</ul>
+<h2 id="4-task2">4. Запуск <code>task2</code><a class="headerlink" href="#4-task2" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>task2
+python<span class="w"> </span>threading_parser.py
+python<span class="w"> </span>multiprocessing_parser.py
+python<span class="w"> </span>async_parser.py
+python<span class="w"> </span>compare.py
+python<span class="w"> </span>inspect_database.py
+</code></pre></div>
+
+<p>Проверка:</p>
+<ul>
+<li>в терминале должны печататься URL и заголовки страниц</li>
+<li><code>compare.py</code> должен вывести время выполнения каждого подхода</li>
+<li><code>inspect_database.py</code> должен показать записи в базе данных</li>
+</ul>
+<h2 id="5">5. Что смотреть в результатах<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="task1">Для <code>task1</code><a class="headerlink" href="#task1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>корректность итоговой суммы</li>
+<li>различие во времени между <code>threading</code>, <code>multiprocessing</code> и <code>asyncio</code></li>
+</ul>
+<h3 id="task2">Для <code>task2</code><a class="headerlink" href="#task2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>успешное подключение к базе данных</li>
+<li>наличие служебного пользователя и служебной поездки</li>
+<li>добавление новых записей в таблицу <code>messages</code></li>
+<li>сравнение времени выполнения трёх подходов</li>
 </ul></div>
             </div>
         </div>
