@@ -1,0 +1,21 @@
+site_name: Lab2 Docs
+site_description: Лабораторная работа 2. Потоки. Процессы. Асинхронность.
+
+theme:
+  name: mkdocs
+  palette:
+    primary: blue
+    accent: light blue
+
+nav:
+  - Home: index.md
+  - Задания: tasks.md
+  - Запуск: run.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - admonition
+  - codehilite
