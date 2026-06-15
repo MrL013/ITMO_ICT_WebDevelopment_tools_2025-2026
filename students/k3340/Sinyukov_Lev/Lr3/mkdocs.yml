@@ -1,0 +1,22 @@
+﻿site_name: Lab3 Docs
+site_description: Лабораторная работа 3. Упаковка FastAPI приложения в Docker, Работа с источниками данных и Очереди
+
+theme:
+  name: mkdocs
+  palette:
+    primary: blue
+    accent: light blue
+
+nav:
+  - Home: index.md
+  - API: api.md
+  - Запуск: run.md
+  - PowerShell: powershell.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - admonition
+  - codehilite

@@ -1,0 +1,7 @@
+Alembic migration scripts for the Travel Buddy Finder project.
+
+Common commands:
+- alembic revision --autogenerate -m "describe change"
+- alembic upgrade head
+- alembic downgrade -1
+
