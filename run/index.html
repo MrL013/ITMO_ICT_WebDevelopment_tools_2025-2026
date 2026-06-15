@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Запуск - Lab2 Docs</title>
+        <title>Запуск - Lab3 Docs</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">Lab2 Docs</a>
+                <a class="navbar-brand" href="..">Lab3 Docs</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,10 +38,13 @@
                                 <a href=".." class="nav-link">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../tasks/" class="nav-link">Задания</a>
+                                <a href="../api/" class="nav-link">API</a>
                             </li>
                             <li class="nav-item">
                                 <a href="./" class="nav-link active" aria-current="page">Запуск</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../powershell/" class="nav-link">PowerShell</a>
                             </li>
                         </ul>
 
@@ -52,12 +55,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../tasks/" class="nav-link">
+                                <a rel="prev" href="../api/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../powershell/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -81,7 +84,7 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">Запуск проекта</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#1" class="nav-link">1. Установка зависимостей</a>
+            <li class="nav-item" data-bs-level="2"><a href="#1" class="nav-link">1. Установка зависимостей для локального запуска</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -89,15 +92,35 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#3-task1" class="nav-link">3. Запуск task1</a>
+            <li class="nav-item" data-bs-level="2"><a href="#3-database_url" class="nav-link">3. Важное замечание по DATABASE_URL</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#4-task2" class="nav-link">4. Запуск task2</a>
+            <li class="nav-item" data-bs-level="2"><a href="#4-docker-compose" class="nav-link">4. Запуск через Docker Compose</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#5" class="nav-link">5. Что смотреть в результатах</a>
+            <li class="nav-item" data-bs-level="2"><a href="#5" class="nav-link">5. Какие сервисы должны подняться</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#6" class="nav-link">6. Доступные адреса</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#7" class="nav-link">7. Основной способ тестирования</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#8" class="nav-link">8. Что проверить после запуска</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#9" class="nav-link">9. Проверка логов</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#10" class="nav-link">10. Альтернативный способ проверки</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -109,63 +132,88 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="_1">Запуск проекта<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="1">1. Установка зависимостей<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p>Для <code>task1</code> достаточно стандартного Python.</p>
-<p>Для <code>task2</code> установите зависимости:</p>
-<div class="codehilite"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>task2/requirements.txt
+<h2 id="1">1. Установка зависимостей для локального запуска<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </code></pre></div>
 
 <h2 id="2">2. Настройка окружения<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>Для <code>task2</code> заполните файл <code>task2/.env</code>.</p>
 <p>Пример:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">DATABASE_URL</span><span class="o">=</span><span class="n">postgresql</span><span class="o">+</span><span class="nl">psycopg2</span><span class="p">:</span><span class="o">//</span><span class="nl">postgres</span><span class="p">:</span><span class="mi">0000</span><span class="nv">@localhost</span><span class="err">:</span><span class="mi">5432</span><span class="o">/</span><span class="n">travel_buddy_db</span>
+<div class="codehilite"><pre><span></span><code><span class="n">DATABASE_URL</span><span class="o">=</span><span class="n">postgresql</span><span class="o">+</span><span class="nl">psycopg2</span><span class="p">:</span><span class="o">//</span><span class="nl">postgres</span><span class="p">:</span><span class="n">postgres</span><span class="nv">@db</span><span class="err">:</span><span class="mi">5432</span><span class="o">/</span><span class="n">travel_buddy_db</span>
+<span class="n">SECRET_KEY</span><span class="o">=</span><span class="nf">replace</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">long</span><span class="o">-</span><span class="n">random</span><span class="o">-</span><span class="n">string</span>
+<span class="n">ALGORITHM</span><span class="o">=</span><span class="n">HS256</span>
+<span class="n">ACCESS_TOKEN_EXPIRE_MINUTES</span><span class="o">=</span><span class="mi">60</span>
+<span class="n">PARSER_SERVICE_URL</span><span class="o">=</span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="nl">parser</span><span class="p">:</span><span class="mi">8001</span>
+<span class="n">PARSER_REQUEST_TIMEOUT</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">CELERY_BROKER_URL</span><span class="o">=</span><span class="nl">redis</span><span class="p">:</span><span class="o">//</span><span class="nl">redis</span><span class="p">:</span><span class="mi">6379</span><span class="o">/</span><span class="mi">0</span>
+<span class="n">CELERY_RESULT_BACKEND</span><span class="o">=</span><span class="nl">redis</span><span class="p">:</span><span class="o">//</span><span class="nl">redis</span><span class="p">:</span><span class="mi">6379</span><span class="o">/</span><span class="mi">1</span>
 <span class="n">PARSER_USER_EMAIL</span><span class="o">=</span><span class="n">parser</span><span class="nv">@travel</span><span class="o">-</span><span class="n">buddy</span><span class="p">.</span><span class="k">local</span>
 <span class="n">PARSER_USERNAME</span><span class="o">=</span><span class="n">web_parser</span>
 <span class="n">PARSER_TRIP_TITLE</span><span class="o">=</span><span class="n">Web</span><span class="w"> </span><span class="n">parsing</span><span class="w"> </span><span class="n">results</span>
+<span class="n">POSTGRES_DB</span><span class="o">=</span><span class="n">travel_buddy_db</span>
+<span class="n">POSTGRES_USER</span><span class="o">=</span><span class="n">postgres</span>
+<span class="n">POSTGRES_PASSWORD</span><span class="o">=</span><span class="n">postgres</span>
 </code></pre></div>
 
-<p>База данных должна совпадать с той, которая использовалась в лабораторной работе 1.</p>
-<h2 id="3-task1">3. Запуск <code>task1</code><a class="headerlink" href="#3-task1" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>task1
-python<span class="w"> </span>threading_sum.py
-python<span class="w"> </span>multiprocessing_sum.py
-python<span class="w"> </span>async_sum.py
-python<span class="w"> </span>compare.py
+<h2 id="3-database_url">3. Важное замечание по <code>DATABASE_URL</code><a class="headerlink" href="#3-database_url" title="Permanent link">&para;</a></h2>
+<p>Для Docker Compose в <code>DATABASE_URL</code> должен использоваться хост <code>db</code>, а не <code>localhost</code>, потому что подключение происходит между контейнерами внутри одной сети Docker.</p>
+<p>Правильно:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">DATABASE_URL</span><span class="o">=</span><span class="n">postgresql</span><span class="o">+</span><span class="nl">psycopg2</span><span class="p">:</span><span class="o">//</span><span class="nl">postgres</span><span class="p">:</span><span class="n">postgres</span><span class="nv">@db</span><span class="err">:</span><span class="mi">5432</span><span class="o">/</span><span class="n">travel_buddy_db</span>
 </code></pre></div>
 
-<p>Проверка:</p>
-<ul>
-<li>все три программы должны вернуть одинаковую сумму</li>
-<li><code>compare.py</code> должен вывести итоговое сравнение времени</li>
-</ul>
-<h2 id="4-task2">4. Запуск <code>task2</code><a class="headerlink" href="#4-task2" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>task2
-python<span class="w"> </span>threading_parser.py
-python<span class="w"> </span>multiprocessing_parser.py
-python<span class="w"> </span>async_parser.py
-python<span class="w"> </span>compare.py
-python<span class="w"> </span>inspect_database.py
+<h2 id="4-docker-compose">4. Запуск через Docker Compose<a class="headerlink" href="#4-docker-compose" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
 </code></pre></div>
 
-<p>Проверка:</p>
+<h2 id="5">5. Какие сервисы должны подняться<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>После старта должны работать следующие контейнеры:</p>
 <ul>
-<li>в терминале должны печататься URL и заголовки страниц</li>
-<li><code>compare.py</code> должен вывести время выполнения каждого подхода</li>
-<li><code>inspect_database.py</code> должен показать записи в базе данных</li>
+<li><code>db</code></li>
+<li><code>redis</code></li>
+<li><code>api</code></li>
+<li><code>parser</code></li>
+<li><code>celery_worker</code></li>
 </ul>
-<h2 id="5">5. Что смотреть в результатах<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
-<h3 id="task1">Для <code>task1</code><a class="headerlink" href="#task1" title="Permanent link">&para;</a></h3>
+<h2 id="6">6. Доступные адреса<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <ul>
-<li>корректность итоговой суммы</li>
-<li>различие во времени между <code>threading</code>, <code>multiprocessing</code> и <code>asyncio</code></li>
+<li>основное API: <code>http://127.0.0.1:8000</code></li>
+<li>Swagger основного API: <code>http://127.0.0.1:8000/docs</code></li>
+<li>сервис парсера: <code>http://127.0.0.1:8001</code></li>
 </ul>
-<h3 id="task2">Для <code>task2</code><a class="headerlink" href="#task2" title="Permanent link">&para;</a></h3>
+<h2 id="7">7. Основной способ тестирования<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>Для проекта подготовлен файл <code>test_main.http</code>, в котором уже собраны основные сценарии проверки:</p>
 <ul>
-<li>успешное подключение к базе данных</li>
-<li>наличие служебного пользователя и служебной поездки</li>
-<li>добавление новых записей в таблицу <code>messages</code></li>
-<li>сравнение времени выполнения трёх подходов</li>
-</ul></div>
+<li>healthcheck основного API</li>
+<li>healthcheck отдельного сервиса парсера</li>
+<li>прямой вызов <code>parser</code></li>
+<li>синхронный вызов парсера через основное API</li>
+<li>асинхронный вызов через Celery</li>
+<li>проверка статуса фоновой задачи</li>
+<li>базовые сценарии Travel Buddy из лабораторной работы 1</li>
+</ul>
+<p>Если ваш редактор поддерживает <code>.http</code>-файлы, этот способ удобнее, чем вручную писать все команды в PowerShell.</p>
+<h2 id="8">8. Что проверить после запуска<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h3 id="api">Основной API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h3>
+<ul>
+<li>должен отвечать на <code>GET /</code></li>
+<li>должен запускаться после выполнения Alembic миграций</li>
+</ul>
+<h3 id="_2">Парсер<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>должен отвечать на <code>GET /</code></li>
+<li>должен обрабатывать <code>POST /parse</code></li>
+</ul>
+<h3 id="celery-worker">Celery worker<a class="headerlink" href="#celery-worker" title="Permanent link">&para;</a></h3>
+<ul>
+<li>должен подключиться к Redis</li>
+<li>должен регистрировать задачу <code>app.tasks.parse_url_task</code></li>
+</ul>
+<h2 id="9">9. Проверка логов<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<p>Если сервис не поднимается, проверьте логи:</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>api<span class="w"> </span>parser<span class="w"> </span>db<span class="w"> </span>celery_worker<span class="w"> </span>--tail<span class="o">=</span><span class="m">200</span>
+</code></pre></div>
+
+<h2 id="10">10. Альтернативный способ проверки<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<p>Если нужно тестировать не через <code>.http</code>-файл, подробные команды для PowerShell вынесены на отдельную страницу <code>PowerShell</code>.</p></div>
             </div>
         </div>
 
