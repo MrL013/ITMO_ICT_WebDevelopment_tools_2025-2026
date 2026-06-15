@@ -1,0 +1,32 @@
+﻿site_name: WEB Labs Docs
+site_description: Единая документация по лабораторным работам lab1, lab2 и lab3
+
+theme:
+  name: mkdocs
+  palette:
+    primary: blue
+    accent: light blue
+
+nav:
+  - Главная: index.md
+  - Lab1:
+      - Обзор: lab1/index.md
+      - API: lab1/api.md
+      - Запуск: lab1/run.md
+  - Lab2:
+      - Обзор: lab2/index.md
+      - Задания: lab2/tasks.md
+      - Запуск: lab2/run.md
+  - Lab3:
+      - Обзор: lab3/index.md
+      - API: lab3/api.md
+      - Запуск: lab3/run.md
+      - PowerShell: lab3/powershell.md
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - admonition
+  - codehilite
